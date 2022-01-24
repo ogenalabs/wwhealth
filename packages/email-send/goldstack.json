@@ -1,0 +1,18 @@
+{
+  "$schema": "./schemas/package.schema.json",
+  "name": "email-send",
+  "template": "email-send",
+  "templateVersion": "0.1.29",
+  "configuration": {},
+  "deployments": [
+    {
+      "name": "dev",
+      "configuration": {
+        "domain": "davidparseen.com\t",
+        "hostedZoneDomain": "davidparseen.com"
+      },
+      "awsUser": "awsUser",
+      "awsRegion": "us-east-2"
+    }
+  ]
+}

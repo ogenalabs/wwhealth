@@ -1,0 +1,26 @@
+{
+  "$schema": "./schemas/package.schema.json",
+  "name": "app-nextjs",
+  "template": "app-nextjs",
+  "templateVersion": "0.1.32",
+  "configuration": {},
+  "deployments": [
+    {
+      "name": "dev",
+      "configuration": {
+        "defaultCacheDuration": 10,
+        "environmentVariables": [
+          {
+            "name": "BACKEND_API_URL",
+            "value": "https://universal-healthcare.davidparseen.com/api/v1"
+          }
+        ],
+        "hostedZoneDomain": "universal-healthcare.davidparseen.com",
+        "websiteDomain": "universal-healthcare.davidparseen.com",
+        "websiteDomainRedirect": "www.universal-healthcare.davidparseen.com"
+      },
+      "awsUser": "awsUser",
+      "awsRegion": "us-east-2"
+    }
+  ]
+}
