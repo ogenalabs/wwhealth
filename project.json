@@ -1,0 +1,33 @@
+{
+  "projectName": "health-dao",
+  "packages": [
+    {
+      "packageName": "app-nextjs",
+      "templateReference": {
+        "templateName": "app-nextjs"
+      }
+    },
+    {
+      "packageName": "lambda-api",
+      "templateReference": {
+        "templateName": "lambda-api"
+      }
+    },
+    {
+      "packageName": "s3",
+      "templateReference": {
+        "templateName": "s3"
+      }
+    },
+    {
+      "packageName": "email-send",
+      "templateReference": {
+        "templateName": "email-send"
+      }
+    }
+  ],
+  "rootTemplateReference": {
+    "templateName": "yarn-pnp-monorepo"
+  },
+  "createdAt": "2022-01-24T13:31:15.470Z"
+}
