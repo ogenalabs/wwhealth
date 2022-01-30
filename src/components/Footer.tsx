@@ -8,7 +8,7 @@ export const Footer = () => (
     as="footer"
     role="contentinfo"
     mx="auto"
-    maxW="container.lg"
+    maxW="container.md"
     py="12"
     px={{ base: "4", md: "8" }}
   >
