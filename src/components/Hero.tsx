@@ -49,27 +49,18 @@ export default function Hero() {
             alignSelf={"center"}
             position={"relative"}
           >
-            <Button
-              colorScheme={"green"}
-              bg={"green.400"}
-              rounded={"full"}
-              px={6}
-              _hover={{
-                bg: "green.500",
-              }}
-              leftIcon={<FaDiscord size={"2em"} />}
+            <Box
+              position={{ base: "relative", md: "initial" }}
+              mb={{ base: "3em", md: 0 }}
             >
-              Join Our Discord
-            </Button>
-
-            <Box>
               <Icon
                 as={Arrow}
                 color={useColorModeValue("gray.800", "gray.300")}
                 w={71}
                 position={"absolute"}
-                right={-71}
-                top={"10px"}
+                right={{ base: -170, md: -71 }}
+                top={{ base: 7, md: "10px" }}
+                transform={{ base: "rotate(-60deg)", md: "rotate(0deg)" }}
               />
               <Text
                 fontSize={"lg"}
@@ -82,6 +73,18 @@ export default function Hero() {
                 Learn More!
               </Text>
             </Box>
+            <Button
+              colorScheme={"green"}
+              bg={"green.400"}
+              rounded={"full"}
+              px={6}
+              _hover={{
+                bg: "green.500",
+              }}
+              leftIcon={<FaDiscord size={"2em"} />}
+            >
+              Join Our Discord
+            </Button>
           </Stack>
         </Stack>
       </Container>
