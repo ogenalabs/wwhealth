@@ -1,15 +1,13 @@
 import { Center, Text, VStack } from "@chakra-ui/react";
 import { Container } from "../components/Container";
 import { Footer } from "../components/Footer";
-import { DarkModeSwitch } from "../components/DarkModeSwitch";
+import Hero from "../components/Hero";
 
 const Index = () => (
-  <Container height="100vh">
-    <DarkModeSwitch />
+  <Container>
     <Center height="full">
-      <VStack>
-        <Text>WWHEALTH</Text>
-        <Text>Coming Soon!</Text>
+      <VStack height="full">
+        <Hero />
       </VStack>
     </Center>
     <Footer />
