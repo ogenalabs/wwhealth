@@ -1,3 +1,0 @@
-# WWHEALTH
-
-wwhealth.site

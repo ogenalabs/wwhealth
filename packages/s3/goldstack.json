@@ -1,0 +1,17 @@
+{
+  "$schema": "./schemas/package.schema.json",
+  "name": "s3",
+  "template": "s3",
+  "templateVersion": "0.1.40",
+  "configuration": {},
+  "deployments": [
+    {
+      "name": "dev",
+      "configuration": {
+        "bucketName": "universal-healthcare-s3"
+      },
+      "awsUser": "awsUser",
+      "awsRegion": "us-east-2"
+    }
+  ]
+}
