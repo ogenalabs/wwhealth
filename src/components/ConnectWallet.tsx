@@ -22,8 +22,6 @@ import { MetaMaskIcon } from "../lib/svg";
 export const ConnectWallet = () => {
   const { authenticate, isAuthenticated, user, logout } = useMoralis();
 
-  console.log({ user: user?.get("role") });
-
   return (
     <>
       {!isAuthenticated ? (
@@ -41,7 +39,6 @@ export const ConnectWallet = () => {
           <MenuButton
             as={Button}
             p={2}
-            transition={"all 0.2s"}
             _focus={{ boxShadow: "none" }}
             rightIcon={<FiChevronDown />}
           >

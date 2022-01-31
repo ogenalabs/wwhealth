@@ -81,7 +81,7 @@ interface SidebarProps extends BoxProps {
 }
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
-  const { user, logout } = useMoralis();
+  const { user, logout, isAuthenticated } = useMoralis();
 
   return (
     <Box
@@ -107,7 +107,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         display={{ base: "flex", md: "none" }}
       >
         <Divider my={8} />
-        {!user ? (
+        {!isAuthenticated ? (
           <ConnectWallet />
         ) : (
           <VStack>
