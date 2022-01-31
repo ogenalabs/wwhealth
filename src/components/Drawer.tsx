@@ -15,6 +15,8 @@ import {
   BoxProps,
   FlexProps,
   VStack,
+  Divider,
+  Button,
 } from "@chakra-ui/react";
 import {
   FiHome,
@@ -22,12 +24,16 @@ import {
   FiCompass,
   FiStar,
   FiMenu,
-  FiCloud,
+  FiLogOut,
+  FiUser,
 } from "react-icons/fi";
 import { IconType } from "react-icons";
 import { ReactText } from "react";
 import { DarkModeSwitch } from "./DarkModeSwitch";
 import { ConnectWallet } from "./ConnectWallet";
+import { useMoralis } from "react-moralis";
+import { DiceAvatar } from "../lib/avatar";
+import truncateEthAddress from "truncate-eth-address";
 
 interface LinkItemProps {
   name: string;
@@ -38,7 +44,7 @@ const LinkItems: Array<LinkItemProps> = [
   { name: "Trends", icon: FiTrendingUp },
   { name: "Explore", icon: FiCompass },
   { name: "Favourites", icon: FiStar },
-  { name: "Account", icon: FiCloud },
+  { name: "Manage Profile", icon: FiUser },
 ];
 
 export default function DrawerMenu({ children }: { children: ReactNode }) {
@@ -75,6 +81,8 @@ interface SidebarProps extends BoxProps {
 }
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
+  const { user, logout } = useMoralis();
+
   return (
     <Box
       bg={useColorModeValue("white", "gray.900")}
@@ -98,7 +106,20 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         spacing={{ base: "0", md: "6" }}
         display={{ base: "flex", md: "none" }}
       >
-        <ConnectWallet />
+        <Divider my={8} />
+        {!user ? (
+          <ConnectWallet />
+        ) : (
+          <VStack>
+            <HStack bg={useColorModeValue("white", "gray.700")} py={2} px={16} rounded={"md"}>
+              <DiceAvatar />
+              <Text>{truncateEthAddress(user.get("ethAddress"))}</Text>
+            </HStack>
+            <NavItem as={Button} py={2} px={20} icon={FiLogOut} onClick={logout} mt={8}>
+              Sign Out
+            </NavItem>
+          </VStack>
+        )}
       </VStack>
     </Box>
   );
@@ -148,6 +169,8 @@ interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
+  const { user, logout } = useMoralis();
+
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
