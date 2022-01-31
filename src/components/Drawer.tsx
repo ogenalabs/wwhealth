@@ -1,4 +1,5 @@
 import React, { ReactNode, useEffect, useState } from "react";
+import Image from "next/image";
 import {
   IconButton,
   Box,
@@ -20,34 +21,33 @@ import {
   useClipboard,
 } from "@chakra-ui/react";
 import {
-  FiHome,
   FiTrendingUp,
   FiCompass,
-  FiStar,
   FiMenu,
   FiLogOut,
   FiUser,
   FiCopy,
+  FiLayout,
 } from "react-icons/fi";
 import { IconType } from "react-icons";
 import { ReactText } from "react";
 import { DarkModeSwitch } from "./DarkModeSwitch";
 import { ConnectWallet } from "./ConnectWallet";
 import { useMoralis, useMoralisWeb3Api } from "react-moralis";
-import { DiceAvatar } from "../lib/avatar";
 import truncateEthAddress from "truncate-eth-address";
-
 import Moralis from "moralis";
+
+import { DiceAvatar } from "../lib/avatar";
+import WWhealthLogo from "../public/img/logo.png";
 
 interface LinkItemProps {
   name: string;
   icon: IconType;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: "Home", icon: FiHome },
+  { name: "Dashboard", icon: FiLayout },
   { name: "Trends", icon: FiTrendingUp },
   { name: "Explore", icon: FiCompass },
-  { name: "Favourites", icon: FiStar },
   { name: "Manage Profile", icon: FiUser },
 ];
 
@@ -87,7 +87,6 @@ interface SidebarProps extends BoxProps {
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   const { user, logout, isAuthenticated } = useMoralis();
   const { hasCopied, onCopy } = useClipboard(user?.get("ethAddress"));
-  const { account } = useMoralisWeb3Api();
 
   return (
     <Box
@@ -99,10 +98,27 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
       h="full"
       {...rest}
     >
-      <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
-        <Text fontSize="2xl">WWHEALTH</Text>
+      <Flex
+        direction={{ base: "row", md: "column" }}
+        gap={{ base: 4, md: 0 }}
+        h="20"
+        alignItems="center"
+        mx="8"
+        justifyContent="space-between"
+      >
+        <Box mt={{base: 2, md: 4}}>
+          <Image
+            src={WWhealthLogo}
+            alt="WWhealth Logo"
+            width={30}
+            height={30}
+          />
+        </Box>
+        <Text fontSize="lg">WWHEALTH</Text>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
+
+      <Divider />
       {LinkItems.map((link) => (
         <NavItem key={link.name} icon={link.icon}>
           {link.name}
@@ -230,15 +246,16 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         aria-label="open menu"
         icon={<FiMenu />}
       />
-
-      <Text
-        display={{ base: "flex", md: "none" }}
-        fontSize="2xl"
-        fontFamily="monospace"
-        fontWeight="bold"
-      >
-        WWHEALTH
-      </Text>
+      <HStack>
+        <Image src={WWhealthLogo} alt="WWhealth Logo" width={20} height={20} />
+        <Text
+          display={{ base: "flex", md: "none" }}
+          fontSize="lg"
+          fontWeight="bold"
+        >
+          WWHEALTH
+        </Text>
+      </HStack>
 
       <DarkModeSwitch />
       <HStack

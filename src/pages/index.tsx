@@ -1,13 +1,13 @@
 import { Center, Text, VStack } from "@chakra-ui/react";
 import { Container } from "../components/Container";
 import { Footer } from "../components/Footer";
-import Hero from "../components/Hero";
+import HomePage from "../components/HomePage";
 
 const Index = () => (
   <Container>
-    <Center height="full">
-      <VStack height="full" minHeight={"70vh"}>
-        
+    <Center width={"full"} maxWidth={"container.lg"} height="full">
+      <VStack width={"full"} height="full" minHeight={"70vh"}>
+        <HomePage />
       </VStack>
     </Center>
     <Footer />
