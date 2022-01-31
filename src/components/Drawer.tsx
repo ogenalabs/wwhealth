@@ -106,7 +106,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         mx="8"
         justifyContent="space-between"
       >
-        <Box mt={{base: 2, md: 4}}>
+        <Box mt={{ base: 2, md: 4 }}>
           <Image
             src={WWhealthLogo}
             alt="WWhealth Logo"
@@ -247,7 +247,14 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         icon={<FiMenu />}
       />
       <HStack>
-        <Image src={WWhealthLogo} alt="WWhealth Logo" width={20} height={20} />
+        <Box display={{ base: "flex", md: "none" }}>
+          <Image
+            src={WWhealthLogo}
+            alt="WWhealth Logo"
+            width={20}
+            height={20}
+          />
+        </Box>
         <Text
           display={{ base: "flex", md: "none" }}
           fontSize="lg"
