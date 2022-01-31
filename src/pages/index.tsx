@@ -6,8 +6,8 @@ import Hero from "../components/Hero";
 const Index = () => (
   <Container>
     <Center height="full">
-      <VStack height="full">
-        <Hero />
+      <VStack height="full" minHeight={"70vh"}>
+        
       </VStack>
     </Center>
     <Footer />
