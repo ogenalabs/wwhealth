@@ -17,6 +17,7 @@ import {
   VStack,
   Divider,
   Button,
+  useClipboard,
 } from "@chakra-ui/react";
 import {
   FiHome,
@@ -26,6 +27,7 @@ import {
   FiMenu,
   FiLogOut,
   FiUser,
+  FiCopy,
 } from "react-icons/fi";
 import { IconType } from "react-icons";
 import { ReactText } from "react";
@@ -82,6 +84,7 @@ interface SidebarProps extends BoxProps {
 
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   const { user, logout, isAuthenticated } = useMoralis();
+  const { hasCopied, onCopy } = useClipboard(user?.get("ethAddress"));
 
   return (
     <Box
@@ -111,11 +114,26 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
           <ConnectWallet />
         ) : (
           <VStack>
-            <HStack bg={useColorModeValue("white", "gray.700")} py={2} px={16} rounded={"md"}>
+            <HStack spacing={6}>
               <DiceAvatar />
               <Text>{truncateEthAddress(user.get("ethAddress"))}</Text>
+              <Button
+                rightIcon={<FiCopy />}
+                onClick={onCopy}
+                ml={2}
+                size={"sm"}
+              >
+                {hasCopied ? "Copied" : "Copy"}
+              </Button>
             </HStack>
-            <NavItem as={Button} py={2} px={20} icon={FiLogOut} onClick={logout} mt={8}>
+            <NavItem
+              as={Button}
+              py={2}
+              px={20}
+              icon={FiLogOut}
+              onClick={logout}
+              mt={8}
+            >
               Sign Out
             </NavItem>
           </VStack>
