@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import {
   IconButton,
   Box,
@@ -33,9 +33,11 @@ import { IconType } from "react-icons";
 import { ReactText } from "react";
 import { DarkModeSwitch } from "./DarkModeSwitch";
 import { ConnectWallet } from "./ConnectWallet";
-import { useMoralis } from "react-moralis";
+import { useMoralis, useMoralisWeb3Api } from "react-moralis";
 import { DiceAvatar } from "../lib/avatar";
 import truncateEthAddress from "truncate-eth-address";
+
+import Moralis from "moralis";
 
 interface LinkItemProps {
   name: string;
@@ -85,6 +87,7 @@ interface SidebarProps extends BoxProps {
 const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
   const { user, logout, isAuthenticated } = useMoralis();
   const { hasCopied, onCopy } = useClipboard(user?.get("ethAddress"));
+  const { account } = useMoralisWeb3Api();
 
   return (
     <Box
@@ -190,7 +193,23 @@ interface MobileProps extends FlexProps {
   onOpen: () => void;
 }
 const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
-  const { user, logout } = useMoralis();
+  const { user } = useMoralis();
+  const { account } = useMoralisWeb3Api();
+  const [balance, setBalance] = useState<string>("");
+
+  useEffect(() => {
+    async function updateBalance() {
+      if (account && user) {
+        const nativeBalance = await account.getNativeBalance({
+          chain: "0xa869",
+          address: user.get("ethAddress"),
+        });
+        setBalance(`${Moralis.Units.FromWei(nativeBalance.balance)} AVAX`);
+      }
+      console.log({ balance });
+    }
+    updateBalance();
+  }, [account, balance, user]);
 
   return (
     <Flex
@@ -226,6 +245,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         spacing={{ base: "0", md: "6" }}
         display={{ base: "none", md: "flex" }}
       >
+        <Text>{balance}</Text>
         <ConnectWallet />
       </HStack>
     </Flex>
