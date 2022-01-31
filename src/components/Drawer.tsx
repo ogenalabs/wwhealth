@@ -1,12 +1,10 @@
 import React, { ReactNode } from "react";
 import {
   IconButton,
-  Avatar,
   Box,
   CloseButton,
   Flex,
   HStack,
-  VStack,
   Icon,
   useColorModeValue,
   Link,
@@ -16,26 +14,20 @@ import {
   useDisclosure,
   BoxProps,
   FlexProps,
-  Menu,
-  MenuButton,
-  MenuDivider,
-  MenuItem,
-  MenuList,
+  VStack,
 } from "@chakra-ui/react";
 import {
   FiHome,
   FiTrendingUp,
   FiCompass,
   FiStar,
-  FiSettings,
   FiMenu,
-  FiBell,
-  FiChevronDown,
   FiCloud,
 } from "react-icons/fi";
 import { IconType } from "react-icons";
 import { ReactText } from "react";
 import { DarkModeSwitch } from "./DarkModeSwitch";
+import { ConnectWallet } from "./ConnectWallet";
 
 interface LinkItemProps {
   name: string;
@@ -102,6 +94,12 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
           {link.name}
         </NavItem>
       ))}
+      <VStack
+        spacing={{ base: "0", md: "6" }}
+        display={{ base: "flex", md: "none" }}
+      >
+        <ConnectWallet />
+      </VStack>
     </Box>
   );
 };
@@ -179,8 +177,12 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
         WWHEALTH
       </Text>
 
-      <HStack spacing={{ base: "0", md: "6" }}>
-        <DarkModeSwitch />
+      <DarkModeSwitch />
+      <HStack
+        spacing={{ base: "0", md: "6" }}
+        display={{ base: "none", md: "flex" }}
+      >
+        <ConnectWallet />
       </HStack>
     </Flex>
   );
