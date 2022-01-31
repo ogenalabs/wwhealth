@@ -3,6 +3,8 @@ import {
   Flex,
   SimpleGrid,
   Stat,
+  StatArrow,
+  StatHelpText,
   StatLabel,
   StatNumber,
   useColorModeValue,
@@ -16,9 +18,12 @@ interface StatsCardProps {
   title: string;
   stat: string;
   icon: ReactNode;
+  type: "increase" | "decrease";
+  delta: string;
 }
+
 function StatsCard(props: StatsCardProps) {
-  const { title, stat, icon } = props;
+  const { title, stat, icon, type, delta } = props;
   return (
     <Stat
       px={{ base: 2, md: 4 }}
@@ -36,6 +41,10 @@ function StatsCard(props: StatsCardProps) {
           <StatNumber fontSize={"2xl"} fontWeight={"medium"}>
             {stat}
           </StatNumber>
+          <StatHelpText>
+            <StatArrow type={type} />
+            {delta}
+          </StatHelpText>
         </Box>
         <Box
           my={"auto"}
@@ -61,16 +70,22 @@ export default function Lead() {
           title={"Market Cap"}
           stat={"582,989"}
           icon={<BsCurrencyDollar size={"2em"} />}
+          type={"increase"}
+          delta={"+1.2%"}
         />
         <StatsCard
           title={"WWH Price"}
           stat={"10"}
           icon={<BsCurrencyDollar size={"2em"} />}
+          type={"decrease"}
+          delta={"-0.2%"}
         />
         <StatsCard
           title={"gWWH"}
           stat={"1,000"}
           icon={<BsCurrencyDollar size={"2em"} />}
+          type={"increase"}
+          delta={"+0.2%"}
         />
       </SimpleGrid>
     </Box>
