@@ -19,6 +19,11 @@ import {
   Divider,
   Button,
   useClipboard,
+  Stack,
+  List,
+  ListIcon,
+  ListItem,
+  Spacer,
 } from "@chakra-ui/react";
 import {
   FiTrendingUp,
@@ -28,7 +33,11 @@ import {
   FiUser,
   FiCopy,
   FiLayout,
+  FiPercent,
+  FiArrowDown,
+  FiArrowUp,
 } from "react-icons/fi";
+import { RiCurrencyLine } from "react-icons/ri";
 import { IconType } from "react-icons";
 import { ReactText } from "react";
 import { DarkModeSwitch } from "./DarkModeSwitch";
@@ -39,16 +48,20 @@ import Moralis from "moralis";
 
 import { DiceAvatar } from "../lib/avatar";
 import WWhealthLogo from "../public/img/logo.png";
+import { useRouter } from "next/router";
 
 interface LinkItemProps {
   name: string;
   icon: IconType;
+  href: string;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: "Dashboard", icon: FiLayout },
-  { name: "Trends", icon: FiTrendingUp },
-  { name: "Explore", icon: FiCompass },
-  { name: "Manage Profile", icon: FiUser },
+  { name: "Dashboard", icon: FiLayout, href: "/" },
+  { name: "Bond", icon: RiCurrencyLine, href: "/bond" },
+  { name: "Stake", icon: FiPercent, href: "/stake" },
+  { name: "Trends", icon: FiTrendingUp, href: "/trends" },
+  { name: "Explore", icon: FiCompass, href: "/explore" },
+  { name: "Manage Profile", icon: FiUser, href: "/profile" },
 ];
 
 export default function DrawerMenu({ children }: { children: ReactNode }) {
@@ -110,20 +123,71 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
           <Image
             src={WWhealthLogo}
             alt="WWhealth Logo"
-            width={30}
-            height={30}
+            width={20}
+            height={20}
           />
         </Box>
         <Text fontSize="lg">WWHEALTH</Text>
         <CloseButton display={{ base: "flex", md: "none" }} onClick={onClose} />
       </Flex>
 
-      <Divider />
-      {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
-          {link.name}
-        </NavItem>
-      ))}
+      <Divider mb={12} />
+      {LinkItems.map((link) =>
+        link.name === "Bond" ? (
+          <Stack maxWidth={"90%"}>
+            <NavItem key={link.name} icon={link.icon} href={link.href}>
+              {link.name}
+            </NavItem>
+            <VStack pl={8} fontSize={"xs"} fontFamily={"monospace"}>
+              <List spacing={2}>
+                <ListItem overflowX={"visible"}>
+                  <HStack>
+                    <p>WWH-AVAX LP</p>
+                    <Spacer />
+                    <p>30.3%</p>
+                    <ListIcon as={FiArrowUp} color="green.500" />
+                  </HStack>
+                </ListItem>
+                <ListItem>
+                  <HStack>
+                    <p>gWWH</p>
+                    <Spacer />
+                    <p> 30.3%</p>
+                    <ListIcon as={FiArrowUp} color="green.500" />
+                  </HStack>
+                </ListItem>
+                <ListItem>
+                  <HStack>
+                    <p>AVAX</p>
+                    <Spacer />
+                    <p> 10.3%</p>
+                    <ListIcon as={FiArrowDown} color="red.500" />
+                  </HStack>
+                </ListItem>
+                <ListItem>
+                  <HStack>
+                    <p>MIM</p>
+                    <Spacer />
+                    <p> 0.3%</p>
+                    <ListIcon as={FiArrowDown} color="red.500" />
+                  </HStack>
+                </ListItem>
+              </List>
+            </VStack>
+          </Stack>
+        ) : (
+          <HStack>
+            <NavItem
+              width={"full"}
+              key={link.name}
+              icon={link.icon}
+              href={link.href}
+            >
+              {link.name}
+            </NavItem>
+          </HStack>
+        )
+      )}
       <VStack
         spacing={{ base: "0", md: "6" }}
         display={{ base: "flex", md: "none" }}
@@ -134,7 +198,7 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
         ) : (
           <VStack>
             <HStack spacing={6}>
-              <DiceAvatar />
+              <DiceAvatar seed={user.get("ethAddress")} />
               <Text>{truncateEthAddress(user.get("ethAddress"))}</Text>
               <Button
                 colorScheme={"green"}
@@ -168,11 +232,12 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
 interface NavItemProps extends FlexProps {
   icon: IconType;
   children: ReactText;
+  href?: string;
 }
-const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
+const NavItem = ({ href, icon, children, ...rest }: NavItemProps) => {
   return (
     <Link
-      href="#"
+      href={href}
       style={{ textDecoration: "none" }}
       _focus={{ boxShadow: "none" }}
     >
@@ -184,7 +249,7 @@ const NavItem = ({ icon, children, ...rest }: NavItemProps) => {
         role="group"
         cursor="pointer"
         _hover={{
-          bg: "cyan.400",
+          bg: "green.300",
           color: "white",
         }}
         {...rest}
