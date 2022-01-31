@@ -1,6 +1,5 @@
 import { Center, Text, VStack } from "@chakra-ui/react";
 import { Container } from "../components/Container";
-import { Footer } from "../components/Footer";
 import HomePage from "../components/HomePage";
 
 const Index = () => (
@@ -10,7 +9,6 @@ const Index = () => (
         <HomePage />
       </VStack>
     </Center>
-    <Footer />
   </Container>
 );
 

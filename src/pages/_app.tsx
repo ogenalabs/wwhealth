@@ -6,6 +6,7 @@ import { AppProps } from "next/app";
 
 import "../global.css";
 import Drawer from "../components/Drawer";
+import { Footer } from "../components/Footer";
 
 const APP_ID = process.env.NEXT_PUBLIC_MORALIS_APPLICATION_ID;
 const SERVER_URL = process.env.NEXT_PUBLIC_MORALIS_SERVER_URL;
@@ -17,6 +18,7 @@ function Application({ Component, pageProps, router }: AppProps) {
         <Drawer>
           <ScaleFade in={true} key={router.route} initialScale={0.9}>
             <Component {...pageProps} />
+            <Footer />
           </ScaleFade>
         </Drawer>
       </ChakraProvider>
