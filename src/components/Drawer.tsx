@@ -118,6 +118,9 @@ const SidebarContent = ({ onClose, ...rest }: SidebarProps) => {
               <DiceAvatar />
               <Text>{truncateEthAddress(user.get("ethAddress"))}</Text>
               <Button
+                colorScheme={"green"}
+                bg={"green.500"}
+                rounded={"full"}
                 rightIcon={<FiCopy />}
                 onClick={onCopy}
                 ml={2}

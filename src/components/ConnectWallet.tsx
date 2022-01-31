@@ -28,13 +28,17 @@ export const ConnectWallet = () => {
     <>
       {!isAuthenticated ? (
         <Button
-          onClick={() => authenticate()}
+          onClick={() =>
+            authenticate({
+              signingMessage: "Signing into WWhealth.site",
+            })
+          }
           variantcolor="green"
           size="md"
           mr={4}
           leftIcon={<MetaMaskIcon />}
         >
-          Connect Wallet
+          {isAuthenticated ? "Authenticate" : "Connect Wallet"}
         </Button>
       ) : (
         <Menu autoSelect={false} flip={false} matchWidth={true}>
