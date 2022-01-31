@@ -1,10 +1,7 @@
 import {
-  Avatar,
-  AvatarGroup,
   Button,
   Flex,
   Icon,
-  Progress,
   StatArrow,
   StatHelpText,
   Td,
@@ -21,7 +18,7 @@ function BondTableRow(props) {
   const textColor = useColorModeValue("gray.700", "white");
   return (
     <Tr>
-      <Td minWidth={0} pl="0px">
+      <Td>
         <Flex align="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
           <Icon as={logo} h={"24px"} w={"24px"} pe="5px" />
         </Flex>
@@ -38,8 +35,14 @@ function BondTableRow(props) {
           </Text>
         </Flex>
       </Td>
-      <Td>
-        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+      <Td display={{ base: "none", md: "revert" }}>
+        <Text
+          display={{ base: "none", md: "flex" }}
+          fontSize="md"
+          color={textColor}
+          fontWeight="bold"
+          pb=".5rem"
+        >
           {price}
         </Text>
       </Td>
@@ -51,14 +54,20 @@ function BondTableRow(props) {
         </StatHelpText>
       </Td>
 
-      <Td>
-        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+      <Td display={{ base: "none", md: "revert" }}>
+        <Text
+          display={{ base: "none", md: "flex" }}
+          fontSize="md"
+          color={textColor}
+          fontWeight="bold"
+          pb=".5rem"
+        >
           {purchased}
         </Text>
       </Td>
       <Td minWidth={0} pl="0px">
         <Flex align="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
-          <Button rightIcon={<FiArrowRight />}>Bond</Button>
+          <Button bg={useColorModeValue("gray.200", "gray.700")} color={"green.400"} rightIcon={<FiArrowRight />}>Bond</Button>
         </Flex>
       </Td>
     </Tr>

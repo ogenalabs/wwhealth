@@ -9,16 +9,10 @@ import {
   Th,
   Thead,
   Tr,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import BondTableRow from "./BondTableRow";
-import {
-  FaJira,
-  FaSlackHash,
-  FaSpotify,
-  FaYinYang,
-  FaYoast,
-  FaYoutube,
-} from "react-icons/fa";
+import { FaJira, FaSlackHash, FaSpotify, FaYinYang } from "react-icons/fa";
 
 function Card(props) {
   const { variant, children, ...rest } = props;
@@ -30,14 +24,6 @@ function CardHeader(props) {
 }
 
 export const Bond = () => {
-  const [avatar1, avatar2, avatar3, avatar4, avatar5, avatar6] = [
-    "https://avatars.dicebear.com/api/adventurer-neutral/1.svg",
-    "https://avatars.dicebear.com/api/adventurer-neutral/2.svg",
-    "https://avatars.dicebear.com/api/adventurer-neutral/3.svg",
-    "https://avatars.dicebear.com/api/adventurer-neutral/4.svg",
-    "https://avatars.dicebear.com/api/adventurer-neutral/5.svg",
-    "https://avatars.dicebear.com/api/adventurer-neutral/6.svg",
-  ];
   const dashboardTableData = [
     {
       logo: FaYinYang,
@@ -81,9 +67,9 @@ export const Bond = () => {
     },
   ];
   return (
-    <Center>
+    <Center bg={useColorModeValue("white", "gray.900")}>
       <Card p={4} overflowX={{ sm: "scroll", xl: "hidden" }} minWidth={"60vw"}>
-        <CardHeader p="12px 0px 28px 0px">
+        <CardHeader>
           <Flex direction="column">
             <Text fontSize="lg" fontWeight="bold">
               Bond
@@ -92,14 +78,18 @@ export const Bond = () => {
         </CardHeader>
         <Table variant="simple">
           <Thead>
-            <Tr my=".8rem" ps="0px">
+            <Tr my=".8rem">
               <Th ps="0px" color="gray.400"></Th>
               <Th ps="0px" color="gray.400">
                 Bond
               </Th>
-              <Th color="gray.400">Price</Th>
+              <Th display={{ base: "none", md: "block" }} color="gray.400">
+                Price
+              </Th>
               <Th color="gray.400">ROI</Th>
-              <Th color="gray.400">Purchased</Th>
+              <Th display={{ base: "none", md: "block" }} color="gray.400">
+                Purchased
+              </Th>
               <Th color="gray.400"></Th>
             </Tr>
           </Thead>
